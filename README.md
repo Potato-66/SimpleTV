@@ -1,7 +1,7 @@
 # SimpleTV
 观看电视直播，支持央视和地方台，共239个频道。  
 目前仅支持IPV6网络，IPV4网络无法播放。  
-IPV6测试[地址](http://test-ipv6.com/)，如显示运营商已接入IPV6但无法访问IPV6网站，需要在路由器设置打开IPV6功能([华为路由器参考](https://consumer.huawei.com/cn/support/content/zh-cn00685838/#:~:text=%E9%80%9A%E8%BF%87%E6%99%BA%E6%85%A7%E7%94%9F%E6%B4%BB%20App%20%E8%AE%BE%E7%BD%AE%201%20%E6%89%8B%E6%9C%BA%2F%E5%B9%B3%E6%9D%BF%E8%BF%9E%E6%8E%A5%E5%88%B0%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%20Wi-Fi%E3%80%82%202%20%E6%89%93%E5%BC%80%E6%99%BA%E6%85%A7%E7%94%9F%E6%B4%BB,%E7%82%B9%E5%87%BB%20IPv6%20%E3%80%82%20%E7%82%B9%E5%87%BB%20IPv6%20%E5%BC%80%E5%85%B3%EF%BC%8C%E5%BC%80%E5%90%AF%E6%88%96%E5%85%B3%E9%97%AD%20IPv6%20%E5%8A%9F%E8%83%BD%E3%80%82))  
+IPV6测试[地址](http://test-ipv6.com/)，如显示运营商已接入IPV6但无法访问IPV6网站，需要在路由器设置打开IPV6功能([华为路由器参考](https://consumer.huawei.com/cn/support/content/zh-cn00685838/#:~:text=%E9%80%9A%E8%BF%87%E6%99%BA%E6%85%A7%E7%94%9F%E6%B4%BB%20App%20%E8%AE%BE%E7%BD%AE%201%20%E6%89%8B%E6%9C%BA%2F%E5%B9%B3%E6%9D%BF%E8%BF%9E%E6%8E%A5%E5%88%B0%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%20Wi-Fi%E3%80%82%202%20%E6%89%93%E5%BC%80%E6%99%BA%E6%85%A7%E7%94%9F%E6%B4%BB,%E7%82%B9%E5%87%BB%20IPv6%20%E3%80%82%20%E7%82%B9%E5%87%BB%20IPv6%20%E5%BC%80%E5%85%B3%EF%BC%8C%E5%BC%80%E5%90%AF%E6%88%96%E5%85%B3%E9%97%AD%20IPv6%20%E5%8A%9F%E8%83%BD%E3%80%82),[小米路由器参考](https://cdn.cnbj1.fds.api.mi-img.com/ics-resources/articles/6055c933ec317cb4ee2d0103.html))  
 所有素材及直播源均来源于互联网，**仅供测试研究，不得商用**。如有侵权，请联系我删除。
 # 安装
 1.下载apk后使用U盘安装（TCL电视系统屏蔽了apk文件，需要用自带的电视卫视进入U盘安装）    
