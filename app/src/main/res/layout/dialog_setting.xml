@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="autoBoot"
+            type="java.lang.Boolean" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/setting"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/lb_action_text_size" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_auto_boot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/switch_selector"
+                android:checked="@{autoBoot}"
+                android:nextFocusUp="@id/btn_manual_update"
+                android:nextFocusDown="@id/btn_manual_update"
+                android:text="@string/boot_startup"
+                android:padding="10dp"
+                android:textColor="@color/text_color"
+                android:thumb="@drawable/switch_thumb_selector"
+                app:track="@drawable/switch_track_selector" />
+
+            <Button
+                android:id="@+id/btn_manual_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_selector"
+                android:nextFocusUp="@id/sw_auto_boot"
+                android:nextFocusDown="@id/sw_auto_boot"
+                android:text="@string/manual_update" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/lb_basic_card_content_text_size" />
+        </LinearLayout>
+    </ScrollView>
+</layout>
