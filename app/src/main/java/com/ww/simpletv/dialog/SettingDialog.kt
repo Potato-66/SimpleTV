@@ -31,10 +31,8 @@ class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
 
     override fun onResume() {
         super.onResume()
-        binding.swAutoBoot.setOnCheckedChangeListener { button, b ->
-            if (button.isPressed) {
-                MMKV.defaultMMKV().encode(Constant.KEY_BOOT_STARTUP, b)
-            }
+        binding.swAutoBoot.setOnCheckedChangeListener { _, b ->
+            MMKV.defaultMMKV().encode(Constant.KEY_BOOT_STARTUP, b)
         }
         binding.btnManualUpdate.setOnClickListener {
             context?.let { context ->
