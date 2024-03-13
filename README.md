@@ -18,4 +18,6 @@ IPV6测试[地址](http://test-ipv6.com/)，如显示运营商已接入IPV6但�
 ![湖北经视](https://github.com/Potato-66/SimpleTV/blob/main/img/5.png)
 ![家庭影院](https://github.com/Potato-66/SimpleTV/blob/main/img/6.png)
 # 致谢
-直播来源：https://github.com/Meroser/IPTV
+直播来源：  
+https://github.com/Meroser/IPTV  
+https://github.com/fanmingming/live
