@@ -44,7 +44,7 @@ object ChannelUtils {
             lines.forEach { line ->
                 if (line.startsWith("#EXTINF")) {
                     line.split(" ")
-                    Regex("tvg-id=\"(\\w+)\"").find(line)?.groups?.get(1)?.let {
+                    Regex("tvg-id=\"([^\"]+)\"").find(line)?.groups?.get(1)?.let {
                         id = it.value
                     }
                     Regex("tvg-logo=\"(.*?)\"").find(line)?.groups?.get(1)?.let {
