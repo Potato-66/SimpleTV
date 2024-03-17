@@ -26,7 +26,10 @@ class ChannelListDialog(private val tvs: Set<TV>?,private val tv: TV?) : BaseDia
             val groups = arrayListOf<String>()
             groups.addAll(map.keys)
             binding.lvGroup.adapter = context?.let { GroupAdapter(it, groups) }
-            val index = groups.indexOf(tv?.group)
+            var index = groups.indexOf(tv?.group?.uppercase())
+            if (index == -1) {
+                index = 0
+            }
             binding.lvGroup.setSelection(index)
             val channelAdapter = context?.let { ChannelAdapter(it) }
             binding.lvChannel.adapter = channelAdapter
