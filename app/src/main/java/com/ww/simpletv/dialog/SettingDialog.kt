@@ -3,6 +3,7 @@ package com.ww.simpletv.dialog
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.tencent.mmkv.MMKV
+import com.ww.simpletv.AppUtils
 import com.ww.simpletv.ChannelUtils
 import com.ww.simpletv.Constant
 import com.ww.simpletv.R
@@ -61,6 +62,31 @@ class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
                         if (b) R.string.update_success else R.string.update_file,
                         Toast.LENGTH_LONG
                     ).show()
+                }
+            }
+        }
+        context?.let {
+            binding.tvVersion.text = getString(R.string.version_info, AppUtils.getAppVersionName(it))
+        }
+        binding.btnUpdateVersion.setOnClickListener {
+            activity?.let { context ->
+                binding.btnUpdateVersion.text = getString(R.string.updating)
+                binding.btnUpdateVersion.isEnabled = false
+                lifecycleScope.launch {
+                    val versionInfo = withContext(Dispatchers.IO) {
+                        AppUtils.getVersion()
+                    }
+                    binding.btnUpdateVersion.text = getString(R.string.update_version)
+                    binding.btnUpdateVersion.isEnabled = true
+                    versionInfo?.let {
+                        if (it.versionCode > AppUtils.getAppVersionCode(context)) {
+                            UpdateDialog(versionInfo).show(context.supportFragmentManager, Constant.DIALOG_TAG_UPDATE)
+                        } else {
+                            Toast.makeText(context, getString(R.string.latest_version), Toast.LENGTH_LONG).show()
+                        }
+                    }?:let {
+                        Toast.makeText(context, getString(R.string.get_version_error_hint), Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }

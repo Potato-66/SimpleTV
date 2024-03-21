@@ -6,9 +6,11 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import com.ww.simpletv.Constant
 
 /**
  *
@@ -34,11 +36,18 @@ abstract class BaseDialogFragment<T : ViewDataBinding> : DialogFragment() {
             val window = it.window
             val params = window?.attributes
             params?.run {
-                width = (resources.displayMetrics.widthPixels * 0.4).toInt()
-                height = resources.displayMetrics.heightPixels
-                gravity = Gravity.START
+                if (tag == Constant.DIALOG_TAG_UPDATE) {
+                    width = (resources.displayMetrics.widthPixels * 0.5).toInt()
+                    height = WindowManager.LayoutParams.WRAP_CONTENT
+                    gravity = Gravity.CENTER
+                } else {
+                    width = (resources.displayMetrics.widthPixels * 0.4).toInt()
+                    height = resources.displayMetrics.heightPixels
+                    gravity = Gravity.START
+                }
                 dimAmount = 0f
                 alpha = 0.9f
+                window.attributes = params
             }
             it.setOnKeyListener { _, _, keyEvent ->
                 if (keyEvent.keyCode == KeyEvent.KEYCODE_BACK) {
@@ -48,13 +57,12 @@ abstract class BaseDialogFragment<T : ViewDataBinding> : DialogFragment() {
                     false
                 }
             }
-            window?.attributes = params
         }
     }
 
     abstract fun initLayoutResource(): Int
 
-    open fun initBindData(){}
+    open fun initBindData() {}
 
     override fun onDestroy() {
         super.onDestroy()

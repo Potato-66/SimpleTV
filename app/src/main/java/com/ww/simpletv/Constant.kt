@@ -16,4 +16,8 @@ object Constant {
     const val KEY_INIT = "init"
     const val DIALOG_TAG_SETTING = "setting"
     const val DIALOG_TAG_CHANNEL = "channel"
+    const val DIALOG_TAG_UPDATE = "update"
+    const val URL_VERSION = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Potato-66/Version/main/SimpleTV/versionInfo.json"
+    const val URL_APK = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Potato-66/Version/main/SimpleTV/SimpleTV.apk"
+    const val APK_NAME = "SimpleTV.apk"
 }
