@@ -56,7 +56,10 @@ class UpdateDialog(private val versionInfo: VersionInfo?) : BaseDialogFragment<D
                                         getString(R.string.update_fail_hint, "fail:${status.code}")
                                 }
 
-                                DownloadStatus.Success -> AppUtils.installApk(context)
+                                DownloadStatus.Success -> {
+                                    dismiss()
+                                    AppUtils.installApk(context)
+                                }
                             }
                         }
                     }

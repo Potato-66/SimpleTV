@@ -80,7 +80,7 @@ class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
                     binding.btnUpdateVersion.isEnabled = true
                     versionInfo?.let {
                         if (it.versionCode > AppUtils.getAppVersionCode(context)) {
-                            UpdateDialog(versionInfo).show(context.supportFragmentManager, Constant.DIALOG_TAG_UPDATE)
+                            UpdateDialog(it).show(context.supportFragmentManager, Constant.DIALOG_TAG_UPDATE)
                         } else {
                             Toast.makeText(context, getString(R.string.latest_version), Toast.LENGTH_LONG).show()
                         }
