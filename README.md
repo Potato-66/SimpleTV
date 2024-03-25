@@ -12,12 +12,12 @@
 小米遥控器示例
 ![小米遥控器](https://github.com/Potato-66/SimpleTV/blob/main/img/control.jpg)
 # 频道展示
-![CCTV3 综艺](https://github.com/Potato-66/SimpleTV/blob/main/img/1.png)
-![CCTV5+ 体育赛事](https://github.com/Potato-66/SimpleTV/blob/main/img/2.png)
-![广东卫视](https://github.com/Potato-66/SimpleTV/blob/main/img/3.png)
-![哒啵赛事](https://github.com/Potato-66/SimpleTV/blob/main/img/4.png)
-![湖北经视](https://github.com/Potato-66/SimpleTV/blob/main/img/5.png)
-![家庭影院](https://github.com/Potato-66/SimpleTV/blob/main/img/6.png)
+小米盒子4C  
+![CCTV1 综合](https://github.com/Potato-66/SimpleTV/blob/main/img/1.png)
+![湖南卫视](https://github.com/Potato-66/SimpleTV/blob/main/img/2.png)
+![CHC高清电影](https://github.com/Potato-66/SimpleTV/blob/main/img/3.png)
+![湖北经视](https://github.com/Potato-66/SimpleTV/blob/main/img/4.png)
+![NewTV军事评论](https://github.com/Potato-66/SimpleTV/blob/main/img/5.png)
 # 致谢
 直播来源：  
 https://github.com/Meroser/IPTV  
