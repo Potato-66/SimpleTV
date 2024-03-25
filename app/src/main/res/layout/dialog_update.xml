@@ -52,9 +52,9 @@
 
             <Button
                 android:id="@+id/btn_confirm"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_selector"
                 android:nextFocusRight="@id/btn_cancel"
                 android:text="@string/confirm"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,9 +63,9 @@
 
             <Button
                 android:id="@+id/btn_cancel"
+                style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_selector"
                 android:nextFocusLeft="@id/btn_confirm"
                 android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="parent"

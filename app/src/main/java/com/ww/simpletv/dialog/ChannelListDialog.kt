@@ -14,7 +14,7 @@ import com.ww.simpletv.databinding.DialogChannelBinding
  * @version 1.0
  * @author Potato-66
  */
-class ChannelListDialog(private val tvs: Set<TV>?,private val tv: TV?) : BaseDialogFragment<DialogChannelBinding>() {
+class ChannelListDialog(private val tvs: Set<TV>?, private val tv: TV?) : BaseDialogFragment<DialogChannelBinding>() {
     var onChoose: ((tv: TV) -> Unit)? = null
 
     override fun initLayoutResource(): Int = R.layout.dialog_channel
@@ -38,7 +38,10 @@ class ChannelListDialog(private val tvs: Set<TV>?,private val tv: TV?) : BaseDia
                 binding.lvChannel.setSelection(it.indexOf(tv))
             }
             binding.lvGroup.setOnItemClickListener { _, _, i, _ ->
-                map[groups[i]]?.let { channelAdapter?.setChannelList(it) }
+                map[groups[i]]?.let {
+                    channelAdapter?.setChannelList(it)
+                    binding.lvChannel.setSelection(0)
+                }
             }
             binding.lvChannel.setOnItemClickListener { _, _, i, _ ->
                 channelAdapter?.getChannelList()?.let {

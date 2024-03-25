@@ -14,4 +14,11 @@
     <style name="PlayerActivityStyle" parent="Theme.SimpleTV">
         <item name="android:windowBackground">@android:color/black</item>
     </style>
+
+    <style name="ButtonStyle">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:background">@drawable/btn_selector</item>
+    </style>
 </resources>
