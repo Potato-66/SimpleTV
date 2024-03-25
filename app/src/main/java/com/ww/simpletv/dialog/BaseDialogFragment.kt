@@ -50,7 +50,7 @@ abstract class BaseDialogFragment<T : ViewDataBinding> : DialogFragment() {
                 window.attributes = params
             }
             it.setOnKeyListener { _, _, keyEvent ->
-                if (keyEvent.keyCode == KeyEvent.KEYCODE_BACK) {
+                if (keyEvent.keyCode == KeyEvent.KEYCODE_BACK && tag != Constant.DIALOG_TAG_UPDATE) {
                     dismiss()
                     true
                 } else {

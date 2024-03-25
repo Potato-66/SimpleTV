@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/switch_selector"
                 android:checked="@{autoBoot}"
-                android:nextFocusUp="@id/btn_manual_update"
+                android:nextFocusUp="@id/btn_update_version"
                 android:nextFocusDown="@id/btn_manual_update"
                 android:padding="10dp"
                 android:text="@string/boot_startup"
@@ -50,7 +50,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:nextFocusUp="@id/sw_auto_boot"
-                android:nextFocusDown="@id/sw_auto_boot"
+                android:nextFocusDown="@id/btn_update_version"
                 android:text="@string/manual_update" />
 
             <Button
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:nextFocusUp="@id/sw_auto_boot"
+                android:nextFocusUp="@id/btn_manual_update"
                 android:nextFocusDown="@id/sw_auto_boot"
                 android:text="@string/update_version" />
 
