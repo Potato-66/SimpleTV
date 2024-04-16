@@ -2,6 +2,7 @@ package com.ww.simpletv
 
 import android.content.Context
 import android.util.Log
+import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -66,12 +67,14 @@ object ChannelUtils {
         return if (!file.exists()) {
             if (downloadIPTVFile(file)) file else null
         } else {
-            val lastModified = file.lastModified()
-            if (System.currentTimeMillis() - lastModified > 24 * 60 * 60 * 1000) {
-                if (downloadIPTVFile(file)) {
-                    Log.e("ww", "getChannelFile update iptv file success")
-                } else {
-                    Log.e("ww", "getChannelFile update iptv file fail")
+            if (MMKV.defaultMMKV().decodeBool(Constant.KEY_AUTO_UPDATE, true)) {
+                val lastModified = file.lastModified()
+                if (System.currentTimeMillis() - lastModified > 24 * 60 * 60 * 1000) {
+                    if (downloadIPTVFile(file)) {
+                        Log.e("ww", "getChannelFile update iptv file success")
+                    } else {
+                        Log.e("ww", "getChannelFile update iptv file fail")
+                    }
                 }
             }
             file

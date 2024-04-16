@@ -28,12 +28,16 @@ class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
     override fun initBindData() {
         super.initBindData()
         binding.autoBoot = MMKV.defaultMMKV().decodeBool(Constant.KEY_BOOT_STARTUP, false)
+        binding.autoUpdate = MMKV.defaultMMKV().decodeBool(Constant.KEY_AUTO_UPDATE, true)
     }
 
     override fun onResume() {
         super.onResume()
         binding.swAutoBoot.setOnCheckedChangeListener { _, b ->
             MMKV.defaultMMKV().encode(Constant.KEY_BOOT_STARTUP, b)
+        }
+        binding.swAutoUpdate.setOnCheckedChangeListener { _, b ->
+            MMKV.defaultMMKV().encode(Constant.KEY_AUTO_UPDATE, b)
         }
         binding.btnManualUpdate.setOnClickListener {
             context?.let { context ->

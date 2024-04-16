@@ -13,6 +13,7 @@ object Constant {
     const val URL = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Potato-66/SimpleTV/main/m3u/ipv6/IPTV.m3u"
     const val KEY_LAST_CHANNEL = "last_channel"
     const val KEY_BOOT_STARTUP = "boot_startup"
+    const val KEY_AUTO_UPDATE = "auto_update"
     const val KEY_INIT = "init"
     const val DIALOG_TAG_SETTING = "setting"
     const val DIALOG_TAG_CHANNEL = "channel"
