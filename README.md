@@ -2,11 +2,11 @@
 
 **1.出现“初始化频道列表失败，请尝试手动更新或退出重试”、“播放失败，网络连接超时，请稍后重试”**
 
-![error1](https://github.com/Potato-66/SimpleTV/blob/main/img/q1.jpg)
-![error2](https://github.com/Potato-66/SimpleTV/blob/main/img/q2.jpg)
+![error1](img/q1.png)
+![error2](img/q2.png)
 
 1.请尝试手动更新频道源，更新成功之后退出重新进入，如果更新失败请确认网络是否连通
-![手动更新](https://github.com/Potato-66/SimpleTV/blob/main/img/a1.jpg)
+![手动更新](img/a1.png)
 
 2.如果更新成功后还是无法播放，可能该频道源已失效，请切换频道观看，耐心等待更新修复
 
@@ -27,16 +27,16 @@
 # 操作说明
 
 小米遥控器示例
-![小米遥控器](https://github.com/Potato-66/SimpleTV/blob/main/img/control.jpg)
+![小米遥控器](img/control.jpg)
 
 # 频道展示
 
 小米盒子4C
-![CCTV1 综合](https://github.com/Potato-66/SimpleTV/blob/main/img/1.png)
-![湖南卫视](https://github.com/Potato-66/SimpleTV/blob/main/img/2.png)
-![CHC高清电影](https://github.com/Potato-66/SimpleTV/blob/main/img/3.png)
-![湖北经视](https://github.com/Potato-66/SimpleTV/blob/main/img/4.png)
-![NewTV军事评论](https://github.com/Potato-66/SimpleTV/blob/main/img/5.png)
+![CCTV1 综合](img/1.png)
+![湖南卫视](img/2.png)
+![CHC高清电影](/img/3.png)
+![湖北经视](img/4.png)
+![NewTV军事评论](img/5.png)
 
 # 致谢
 
