@@ -24,4 +24,8 @@
     <string name="init_channel_list">初始化频道列表</string>
     <string name="init_channel_list_fail_network_error">初始化频道列表失败，请尝试手动更新或退出重试</string>
     <string name="update_channel_list_fail_network_error">更新频道列表失败，请尝试手动更新</string>
+    <string name="font_size">字体大小</string>
+    <string name="font_size_normal">标准</string>
+    <string name="font_size_large">大</string>
+    <string name="font_size_huge">超大</string>
 </resources>

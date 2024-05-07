@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rb_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_focus_selector"
+    android:clickable="false"
+    android:focusable="false"
+    android:layoutDirection="rtl"
+    android:padding="10dp"
+    android:checked="true"
+    android:textColor="@color/text_color"
+    android:textDirection="ltr" />

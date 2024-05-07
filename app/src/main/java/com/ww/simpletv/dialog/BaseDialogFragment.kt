@@ -36,7 +36,7 @@ abstract class BaseDialogFragment<T : ViewDataBinding> : DialogFragment() {
             val window = it.window
             val params = window?.attributes
             params?.run {
-                if (tag == Constant.DIALOG_TAG_UPDATE) {
+                if (tag == Constant.DIALOG_TAG_UPDATE || tag == Constant.DIALOG_TAG_FONT_SIZE) {
                     width = (resources.displayMetrics.widthPixels * 0.5).toInt()
                     height = WindowManager.LayoutParams.WRAP_CONTENT
                     gravity = Gravity.CENTER

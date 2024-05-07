@@ -1,11 +1,13 @@
 package com.ww.simpletv.dialog
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.tencent.mmkv.MMKV
 import com.ww.simpletv.AppUtils
 import com.ww.simpletv.ChannelUtils
 import com.ww.simpletv.Constant
+import com.ww.simpletv.FontSizeActivity
 import com.ww.simpletv.R
 import com.ww.simpletv.databinding.DialogSettingBinding
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -88,10 +90,21 @@ class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
                         } else {
                             Toast.makeText(context, getString(R.string.latest_version), Toast.LENGTH_LONG).show()
                         }
-                    }?:let {
+                    } ?: let {
                         Toast.makeText(context, getString(R.string.get_version_error_hint), Toast.LENGTH_LONG).show()
                     }
                 }
+            }
+        }
+        binding.tvFontSize.text =
+            when (MMKV.defaultMMKV().decodeFloat(Constant.KEY_FONT_SIZE, Constant.FONT_SIZE_NORMAL)) {
+                Constant.FONT_SIZE_NORMAL -> getString(R.string.font_size_normal)
+                Constant.FONT_SIZE_LARGE -> getString(R.string.font_size_large)
+                else -> getString(R.string.font_size_huge)
+            }
+        binding.rlFontSize.setOnClickListener {
+            context?.run {
+                startActivity(Intent(this, FontSizeActivity::class.java))
             }
         }
     }

@@ -1,16 +1,17 @@
 package com.ww.simpletv
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.PersistableBundle
 import android.util.Log
 import android.util.Pair
 import android.view.KeyEvent
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.OptIn
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -48,7 +49,7 @@ import java.util.ArrayList
  * @version 1.0
  * @author Potato-66
  */
-class PlayerActivity : AppCompatActivity() {
+class PlayerActivity : BaseActivity() {
     private lateinit var binding: ActivityPlayerBinding
     private var tvList = mutableListOf<TV>()
     private var exoPlayer: ExoPlayer? = null
@@ -293,5 +294,15 @@ class PlayerActivity : AppCompatActivity() {
         exoPlayer?.run {
             release()
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.e("TAG", "onConfigurationChanged:${newConfig.fontScale}")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        Log.e("TAG", "onSaveInstanceState:")
     }
 }

@@ -1,5 +1,6 @@
 package com.ww.simpletv
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -7,6 +8,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.content.FileProvider
 import com.google.gson.Gson
+import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -164,5 +166,17 @@ object AppUtils {
         } finally {
             inputStream?.close()
         }
+    }
+
+    fun setFontScale(context: Context?, fontScale: Float) {
+        val configuration = context?.resources?.configuration
+        configuration?.let {
+            it.fontScale = fontScale
+            context.createConfigurationContext(it)
+        }
+    }
+
+    fun recreateActivity(activity: Activity){
+        activity.recreate()
     }
 }

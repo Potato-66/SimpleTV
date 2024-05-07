@@ -43,8 +43,3 @@
 直播来源：
 https://github.com/Meroser/IPTV  
 https://github.com/fanmingming/live
-
-# 联系
-
-Telegram：https://t.me/+OocnP6oe6mcwYjI9  
-![telegram](img/telegram.png)

@@ -11,7 +11,7 @@ import com.tencent.mmkv.MMKV
  * @version 1.0
  * @author Potato-66
  */
-class TVApplication:Application() {
+class TVApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         MMKV.initialize(this)

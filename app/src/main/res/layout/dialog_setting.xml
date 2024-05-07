@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="autoBoot"
             type="java.lang.Boolean" />
+
         <variable
             name="autoUpdate"
             type="java.lang.Boolean" />
@@ -58,6 +60,44 @@
                 android:textColor="@color/text_color"
                 android:thumb="@drawable/switch_thumb_selector"
                 app:track="@drawable/switch_track_selector" />
+
+            <RelativeLayout
+                android:id="@+id/rl_font_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/switch_selector"
+                android:descendantFocusability="blocksDescendants"
+                android:focusable="true"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/font_size"
+                    android:textColor="@color/text_color" />
+
+                <TextView
+                    android:id="@+id/tv_font_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/iv_arrow"
+                    android:textColor="@color/text_color"
+                    tools:ignore="RelativeOverlap" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/arrow"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/btn_manual_update"
