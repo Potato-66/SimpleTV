@@ -1,6 +1,7 @@
 package com.ww.simpletv.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,9 +36,9 @@ class FontSizeAdapter(private val context: Context, private val groups: List<Str
         }
         holder.radioButton.text = groups[p0]
         holder.radioButton.textSize = when (p0) {
-            0 -> 15f
-            1 -> 20f
-            else -> 25f
+            0 -> 15 * Constant.FONT_SIZE_NORMAL
+            1 -> 15 * Constant.FONT_SIZE_LARGE
+            else -> 15 * Constant.FONT_SIZE_HUGE
         }
         return view!!
     }

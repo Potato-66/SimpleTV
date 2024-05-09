@@ -1,7 +1,9 @@
 package com.ww.simpletv
 
+import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.tencent.mmkv.MMKV
@@ -20,7 +22,16 @@ class FontSizeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityFontSizeBinding>(this, R.layout.activity_font_size)
+        val lp = window.attributes
+        lp.width = (resources.displayMetrics.widthPixels * 0.5f).toInt()
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.alpha = 0.9f
+        window.attributes = lp
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+        val binding = DataBindingUtil.setContentView<ActivityFontSizeBinding>(
+            this,
+            R.layout.activity_font_size
+        )
         val font = MMKV.defaultMMKV().decodeFloat(Constant.KEY_FONT_SIZE, Constant.FONT_SIZE_NORMAL)
         val index = when (font) {
             Constant.FONT_SIZE_NORMAL -> 0
@@ -44,5 +55,10 @@ class FontSizeActivity : AppCompatActivity() {
             }
             finish()
         }
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        AppUtils.setFontScale(newBase, 1.0f)
+        super.attachBaseContext(newBase)
     }
 }

@@ -1,11 +1,9 @@
 package com.ww.simpletv
 
 import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.PersistableBundle
 import android.util.Log
 import android.util.Pair
 import android.view.KeyEvent
@@ -20,6 +18,7 @@ import androidx.media3.common.C
 import androidx.media3.common.ErrorMessageProvider
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.HttpDataSource.HttpDataSourceException
 import androidx.media3.decoder.ffmpeg.FfmpegAudioRenderer
@@ -57,6 +56,11 @@ class PlayerActivity : BaseActivity() {
     private var exitFlag = false
     private var lastTV: TV? = null
     private var curTVIndex = 0
+    private var retryCount = 0
+
+    companion object{
+        const val MAX_RETRY_COUNT = 3
+    }
 
     @OptIn(UnstableApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +70,7 @@ class PlayerActivity : BaseActivity() {
         hideSystemUi()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
         tvList.addAll(ChannelUtils.channelSet.toMutableList())
+        Log.e("ww", "onCreate: tvList size ${tvList.size}")
         val mmkv = MMKV.defaultMMKV()
         val default = Gson().toJson(ChannelUtils.channelSet.first())
         val tvJson = mmkv.decodeString(Constant.KEY_LAST_CHANNEL, default)
@@ -160,19 +165,28 @@ class PlayerActivity : BaseActivity() {
         }
         binding.exoPlay.setErrorMessageProvider(object : ErrorMessageProvider<PlaybackException> {
             override fun getErrorMessage(throwable: PlaybackException): Pair<Int, String> {
-                Log.e("ww", "getErrorMessage: code:${throwable.errorCode}  name:${throwable.errorCodeName}")
+                Log.e("ww", "getErrorMessage: code:${throwable.errorCode}  name:${throwable.errorCodeName}  retryCount:$retryCount")
                 when (throwable.errorCode) {
                     PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
                     PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT -> {
                         return Pair.create(0, getString(R.string.play_network_error_hint))
                     }
 
-                    PlaybackException.ERROR_CODE_DECODER_INIT_FAILED,
                     PlaybackException.ERROR_CODE_DECODER_QUERY_FAILED,
-                    PlaybackException.ERROR_CODE_DECODING_FAILED,
                     PlaybackException.ERROR_CODE_DECODING_FORMAT_UNSUPPORTED,
                     PlaybackException.ERROR_CODE_DECODING_FORMAT_EXCEEDS_CAPABILITIES -> {
                         return Pair.create(0, getString(R.string.play_decode_error_hint))
+                    }
+
+                    PlaybackException.ERROR_CODE_DECODER_INIT_FAILED,
+                    PlaybackException.ERROR_CODE_DECODING_FAILED -> {
+                        return if (retryCount < MAX_RETRY_COUNT) {
+                            retryCount ++
+                            exoPlayer?.prepare()
+                            Pair.create(0, "")
+                        } else {
+                            Pair.create(0, getString(R.string.play_decode_error_hint))
+                        }
                     }
 
                     PlaybackException.ERROR_CODE_BEHIND_LIVE_WINDOW -> {
@@ -180,7 +194,13 @@ class PlayerActivity : BaseActivity() {
                         return Pair.create(0, "")
                     }
 
-                    else -> return Pair.create(0, getString(R.string.play_other_error_hint))
+                    else -> return if (retryCount < MAX_RETRY_COUNT) {
+                        retryCount ++
+                        exoPlayer?.prepare()
+                        Pair.create(0, "")
+                    } else {
+                        Pair.create(0, getString(R.string.play_other_error_hint))
+                    }
                 }
             }
         })
@@ -260,6 +280,7 @@ class PlayerActivity : BaseActivity() {
         dialog?.onChoose = { tv ->
             lastTV = tv
             curTVIndex = tvList.indexOf(tv)
+            retryCount = 0
             exoPlayer?.run {
                 setMediaItem(MediaItem.fromUri(tv.url))
                 prepare()
@@ -294,15 +315,5 @@ class PlayerActivity : BaseActivity() {
         exoPlayer?.run {
             release()
         }
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        Log.e("TAG", "onConfigurationChanged:${newConfig.fontScale}")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        Log.e("TAG", "onSaveInstanceState:")
     }
 }

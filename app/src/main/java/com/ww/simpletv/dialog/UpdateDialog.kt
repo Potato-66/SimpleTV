@@ -33,7 +33,7 @@ class UpdateDialog(private val versionInfo: VersionInfo?) : BaseDialogFragment<D
             binding.tvHint.visibility = View.GONE
             context?.let { context ->
                 lifecycleScope.launch {
-                    context.externalCacheDir?.let { dir ->
+                    context.filesDir?.let { dir ->
                         AppUtils.download(dir, versionInfo).collect { status ->
                             when (status) {
                                 is DownloadStatus.DownLoading -> {

@@ -53,7 +53,8 @@
             android:name=".FontSizeActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|fontScale"
             android:exported="true"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/FontSizeActivityStyle"/>
 
         <receiver
             android:name=".TVBootReceive"

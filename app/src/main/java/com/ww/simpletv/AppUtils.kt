@@ -8,7 +8,6 @@ import android.os.Build
 import android.util.Log
 import androidx.core.content.FileProvider
 import com.google.gson.Gson
-import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -169,14 +168,15 @@ object AppUtils {
     }
 
     fun setFontScale(context: Context?, fontScale: Float) {
-        val configuration = context?.resources?.configuration
-        configuration?.let {
-            it.fontScale = fontScale
-            context.createConfigurationContext(it)
+        val resources = context?.resources
+        resources?.let {
+            val configuration = it.configuration
+            configuration.fontScale = fontScale
+            context.createConfigurationContext(configuration)
         }
     }
 
-    fun recreateActivity(activity: Activity){
+    fun recreateActivity(activity: Activity) {
         activity.recreate()
     }
 }

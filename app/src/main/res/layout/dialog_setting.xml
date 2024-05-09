@@ -54,7 +54,7 @@
                 android:background="@drawable/switch_selector"
                 android:checked="@{autoUpdate}"
                 android:nextFocusUp="@id/sw_auto_boot"
-                android:nextFocusDown="@id/btn_manual_update"
+                android:nextFocusDown="@id/rl_font_size"
                 android:padding="10dp"
                 android:text="@string/auto_update"
                 android:textColor="@color/text_color"
@@ -63,6 +63,8 @@
 
             <RelativeLayout
                 android:id="@+id/rl_font_size"
+                android:nextFocusUp="@id/sw_auto_update"
+                android:nextFocusDown="@id/btn_manual_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/switch_selector"
@@ -106,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:nextFocusUp="@id/sw_auto_update"
+                android:nextFocusUp="@id/rl_font_size"
                 android:nextFocusDown="@id/btn_update_version"
                 android:text="@string/manual_update" />
 

@@ -25,6 +25,8 @@ import java.io.File
  * @author Potato-66
  */
 class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
+    private var fontScale =  MMKV.defaultMMKV().decodeFloat(Constant.KEY_FONT_SIZE, Constant.FONT_SIZE_NORMAL)
+
     override fun initLayoutResource(): Int = R.layout.dialog_setting
 
     override fun initBindData() {
@@ -96,8 +98,15 @@ class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
                 }
             }
         }
+        val fontScale = MMKV.defaultMMKV().decodeFloat(Constant.KEY_FONT_SIZE, Constant.FONT_SIZE_NORMAL)
+        if (this.fontScale != fontScale) {
+            this.fontScale = fontScale
+            activity?.run {
+                AppUtils.recreateActivity(this)
+            }
+        }
         binding.tvFontSize.text =
-            when (MMKV.defaultMMKV().decodeFloat(Constant.KEY_FONT_SIZE, Constant.FONT_SIZE_NORMAL)) {
+            when (fontScale) {
                 Constant.FONT_SIZE_NORMAL -> getString(R.string.font_size_normal)
                 Constant.FONT_SIZE_LARGE -> getString(R.string.font_size_large)
                 else -> getString(R.string.font_size_huge)
