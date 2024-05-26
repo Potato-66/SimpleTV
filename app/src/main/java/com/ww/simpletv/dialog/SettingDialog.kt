@@ -103,6 +103,7 @@ class SettingDialog : BaseDialogFragment<DialogSettingBinding>() {
             this.fontScale = fontScale
             activity?.run {
                 AppUtils.recreateActivity(this)
+                startActivity(Intent(this,FontSizeActivity::class.java))
             }
         }
         binding.tvFontSize.text =

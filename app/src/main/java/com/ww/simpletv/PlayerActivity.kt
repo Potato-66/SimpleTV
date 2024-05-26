@@ -18,7 +18,6 @@ import androidx.media3.common.C
 import androidx.media3.common.ErrorMessageProvider
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
-import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.HttpDataSource.HttpDataSourceException
 import androidx.media3.decoder.ffmpeg.FfmpegAudioRenderer
@@ -58,7 +57,7 @@ class PlayerActivity : BaseActivity() {
     private var curTVIndex = 0
     private var retryCount = 0
 
-    companion object{
+    companion object {
         const val MAX_RETRY_COUNT = 3
     }
 
@@ -181,7 +180,7 @@ class PlayerActivity : BaseActivity() {
                     PlaybackException.ERROR_CODE_DECODER_INIT_FAILED,
                     PlaybackException.ERROR_CODE_DECODING_FAILED -> {
                         return if (retryCount < MAX_RETRY_COUNT) {
-                            retryCount ++
+                            retryCount++
                             exoPlayer?.prepare()
                             Pair.create(0, "")
                         } else {
@@ -195,7 +194,7 @@ class PlayerActivity : BaseActivity() {
                     }
 
                     else -> return if (retryCount < MAX_RETRY_COUNT) {
-                        retryCount ++
+                        retryCount++
                         exoPlayer?.prepare()
                         Pair.create(0, "")
                     } else {
@@ -218,7 +217,7 @@ class PlayerActivity : BaseActivity() {
         Log.e("ww", "onKeyDown: $keyCode")
         when (keyCode) {
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_BUTTON_SELECT,
-                KeyEvent.KEYCODE_BUTTON_A, KeyEvent.KEYCODE_NUMPAD_ENTER-> {
+            KeyEvent.KEYCODE_BUTTON_A, KeyEvent.KEYCODE_NUMPAD_ENTER -> {
                 showChannelList()
                 return true
             }

@@ -10,7 +10,6 @@ package com.ww.simpletv
  */
 object Constant {
     const val FILE_NAME = "IPTV.m3u"
-    const val URL = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Potato-66/SimpleTV/main/m3u/ipv6/IPTV.m3u"
     const val KEY_LAST_CHANNEL = "last_channel"
     const val KEY_BOOT_STARTUP = "boot_startup"
     const val KEY_AUTO_UPDATE = "auto_update"
@@ -19,8 +18,6 @@ object Constant {
     const val DIALOG_TAG_SETTING = "setting"
     const val DIALOG_TAG_CHANNEL = "channel"
     const val DIALOG_TAG_UPDATE = "update"
-    const val URL_VERSION = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Potato-66/Version/main/SimpleTV/versionInfo.json"
-    const val URL_APK = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Potato-66/Version/main/SimpleTV/SimpleTV.apk"
     const val APK_NAME = "SimpleTV.apk"
     const val FONT_SIZE_NORMAL = 1.0f
     const val FONT_SIZE_LARGE = 1.2f

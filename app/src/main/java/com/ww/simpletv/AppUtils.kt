@@ -58,7 +58,7 @@ object AppUtils {
     fun getVersion(): VersionInfo? {
         try {
             val build = OkHttpClient.Builder().build()
-            build.newCall(Request.Builder().url(Constant.URL_VERSION).build()).execute().use {
+            build.newCall(Request.Builder().url(API.URL_VERSION).build()).execute().use {
                 if (it.isSuccessful) {
                     it.body?.string()?.let { json ->
                         return Gson().fromJson(json, VersionInfo::class.java) as VersionInfo
@@ -76,7 +76,7 @@ object AppUtils {
         var outputStream: FileOutputStream? = null
         return flow {
             val client = OkHttpClient.Builder().build()
-            client.newCall(Request.Builder().url(Constant.URL_APK).build()).execute().use { response ->
+            client.newCall(Request.Builder().url(API.URL_APK).build()).execute().use { response ->
                 if (response.isSuccessful) {
                     response.body?.let { body ->
                         val totalLength = body.contentLength()
@@ -111,12 +111,15 @@ object AppUtils {
             inputStream?.close()
             outputStream?.close()
             delay(1000)
-            val md5 = getMD5(File(dir, Constant.APK_NAME))
-            if (md5 != versionInfo?.md5) {
-                Log.e("ww", "download: md5:$md5,remote md5:${versionInfo?.md5}")
-                emit(DownloadStatus.Fail(-1))
-            } else {
-                emit(DownloadStatus.Success)
+            val file = File(dir, Constant.APK_NAME)
+            if (file.exists()) {
+                val md5 = getMD5(file)
+                if (md5 != versionInfo?.md5) {
+                    Log.e("ww", "download: md5:$md5,remote md5:${versionInfo?.md5}")
+                    emit(DownloadStatus.Fail(-1))
+                } else {
+                    emit(DownloadStatus.Success)
+                }
             }
         }.catch { error ->
             Log.e("ww", "download: catch error:${error.message}")
@@ -150,7 +153,7 @@ object AppUtils {
                 reset()
                 inputStream = FileInputStream(file)
                 val buffer = ByteArray(8 * 1024)
-                var len = 0
+                var len: Int
                 while ((inputStream!!.read(buffer).also { len = it }) != -1) {
                     update(buffer, 0, len)
                 }

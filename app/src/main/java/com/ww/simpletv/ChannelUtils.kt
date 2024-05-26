@@ -70,10 +70,15 @@ object ChannelUtils {
             if (MMKV.defaultMMKV().decodeBool(Constant.KEY_AUTO_UPDATE, true)) {
                 val lastModified = file.lastModified()
                 if (System.currentTimeMillis() - lastModified > 24 * 60 * 60 * 1000) {
-                    if (downloadIPTVFile(file)) {
-                        Log.e("ww", "getChannelFile update iptv file success")
-                    } else {
-                        Log.e("ww", "getChannelFile update iptv file fail")
+                    try {
+                        if (downloadIPTVFile(file)) {
+                            Log.e("ww", "getChannelFile update iptv file success")
+                        } else {
+                            Log.e("ww", "getChannelFile update iptv file fail")
+                        }
+                    } catch (e:Exception) {
+                        e.printStackTrace()
+                        Log.e("ww", "auto update iptv file fail")
                     }
                 }
             }
@@ -83,7 +88,7 @@ object ChannelUtils {
 
     fun downloadIPTVFile(file: File): Boolean {
         val client = OkHttpClient.Builder().build()
-        val url = Constant.URL
+        val url = API.URL_M3U
         return client.newCall(Request.Builder().url(url).build()).execute().use {
             if (it.isSuccessful) {
                 file.createNewFile()
