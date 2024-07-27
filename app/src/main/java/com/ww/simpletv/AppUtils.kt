@@ -76,7 +76,8 @@ object AppUtils {
         var outputStream: FileOutputStream? = null
         return flow {
             val client = OkHttpClient.Builder().build()
-            client.newCall(Request.Builder().url(API.URL_APK).build()).execute().use { response ->
+            val url = versionInfo?.url ?: ""
+            client.newCall(Request.Builder().url(url).build()).execute().use { response ->
                 if (response.isSuccessful) {
                     response.body?.let { body ->
                         val totalLength = body.contentLength()

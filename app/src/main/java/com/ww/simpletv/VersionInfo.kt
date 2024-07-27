@@ -8,4 +8,9 @@ package com.ww.simpletv
  * @version 1.0
  * @author Potato-66
  */
-data class VersionInfo(val versionCode: Long, val versionName: String, val md5: String)
+data class VersionInfo(
+    val versionCode: Long,
+    val versionName: String,
+    val md5: String,
+    val url: String
+)
