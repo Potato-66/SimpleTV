@@ -16,7 +16,7 @@ import com.tencent.mmkv.MMKV
  */
 class TVBootReceive : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.e("ww", "onReceive: 开机")
+        Log.e("TVBootReceive", "onReceive: 开机")
         intent?.run {
             if (action == Intent.ACTION_BOOT_COMPLETED) {
                 if (MMKV.defaultMMKV().decodeBool(Constant.KEY_BOOT_STARTUP, false)) {

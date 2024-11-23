@@ -1,7 +1,7 @@
 package com.ww.simpletv.dialog
 
 import com.ww.simpletv.R
-import com.ww.simpletv.TV
+import com.ww.simpletv.bean.TV
 import com.ww.simpletv.adapter.ChannelAdapter
 import com.ww.simpletv.adapter.GroupAdapter
 import com.ww.simpletv.databinding.DialogChannelBinding

@@ -1,4 +1,4 @@
-package com.ww.simpletv
+package com.ww.simpletv.bean
 
 import java.io.Serializable
 

@@ -34,6 +34,7 @@ import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
 import androidx.media3.exoplayer.video.VideoRendererEventListener
 import com.google.gson.Gson
 import com.tencent.mmkv.MMKV
+import com.ww.simpletv.bean.TV
 import com.ww.simpletv.databinding.ActivityPlayerBinding
 import com.ww.simpletv.dialog.ChannelListDialog
 import com.ww.simpletv.dialog.SettingDialog
@@ -58,7 +59,8 @@ class PlayerActivity : BaseActivity() {
     private var retryCount = 0
 
     companion object {
-        const val MAX_RETRY_COUNT = 3
+        private const val MAX_RETRY_COUNT = 3
+        private const val TAG = "PlayerActivity"
     }
 
     @OptIn(UnstableApi::class)
@@ -69,7 +71,7 @@ class PlayerActivity : BaseActivity() {
         hideSystemUi()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_player)
         tvList.addAll(ChannelUtils.channelSet.toMutableList())
-        Log.e("ww", "onCreate: tvList size ${tvList.size}")
+        Log.e(TAG, "onCreate: tvList size ${tvList.size}")
         val mmkv = MMKV.defaultMMKV()
         val default = Gson().toJson(ChannelUtils.channelSet.first())
         val tvJson = mmkv.decodeString(Constant.KEY_LAST_CHANNEL, default)
@@ -132,7 +134,7 @@ class PlayerActivity : BaseActivity() {
                         override fun getRetryDelayMsFor(loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo): Long {
                             val errorCount = loadErrorInfo.errorCount
                             val exception = loadErrorInfo.exception
-                            Log.e("ww", "getRetryDelayMsFor:errorCount:$errorCount  exception:${exception::class.java.simpleName}")
+                            Log.e(TAG, "getRetryDelayMsFor:errorCount:$errorCount  exception:${exception::class.java.simpleName}")
                             return if (exception is HttpDataSourceException) {
                                 5000
                             } else {
@@ -164,7 +166,7 @@ class PlayerActivity : BaseActivity() {
         }
         binding.exoPlay.setErrorMessageProvider(object : ErrorMessageProvider<PlaybackException> {
             override fun getErrorMessage(throwable: PlaybackException): Pair<Int, String> {
-                Log.e("ww", "getErrorMessage: code:${throwable.errorCode}  name:${throwable.errorCodeName}  retryCount:$retryCount")
+                Log.e(TAG, "getErrorMessage: code:${throwable.errorCode}  name:${throwable.errorCodeName}  retryCount:$retryCount")
                 when (throwable.errorCode) {
                     PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
                     PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT -> {
@@ -214,7 +216,7 @@ class PlayerActivity : BaseActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        Log.e("ww", "onKeyDown: $keyCode")
+        Log.e(TAG, "onKeyDown: $keyCode")
         when (keyCode) {
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_BUTTON_SELECT,
             KeyEvent.KEYCODE_BUTTON_A, KeyEvent.KEYCODE_NUMPAD_ENTER -> {

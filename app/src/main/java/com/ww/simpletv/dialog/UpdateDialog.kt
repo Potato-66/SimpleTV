@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import com.ww.simpletv.AppUtils
 import com.ww.simpletv.DownloadStatus
 import com.ww.simpletv.R
-import com.ww.simpletv.VersionInfo
+import com.ww.simpletv.bean.VersionInfo
 import com.ww.simpletv.databinding.DialogUpdateBinding
 import kotlinx.coroutines.launch
 

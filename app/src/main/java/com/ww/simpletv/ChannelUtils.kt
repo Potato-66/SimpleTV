@@ -3,6 +3,7 @@ package com.ww.simpletv
 import android.content.Context
 import android.util.Log
 import com.tencent.mmkv.MMKV
+import com.ww.simpletv.bean.TV
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -18,6 +19,7 @@ import java.io.File
  * @author Potato-66
  */
 object ChannelUtils {
+    private const val TAG = "ChannelUtils"
     val channelSet = linkedSetOf<TV>()
 
     suspend fun updateChannel(context: Context): Boolean {
@@ -30,12 +32,12 @@ object ChannelUtils {
         return withContext(Dispatchers.IO) {
             val file = getChannelFile(context)
             if (file == null) {
-                Log.e("ww", "parseChannel: iptv file not exist")
+                Log.e(TAG, "parseChannel: iptv file not exist")
                 return@withContext
             }
             val lines = file.readLines()
             if (!lines[0].startsWith("#EXTM3U")) {
-                Log.e("ww", "parseChannel: Non standard m3u8 file, parsing error")
+                Log.e(TAG, "parseChannel: Non standard m3u8 file, parsing error")
                 return@withContext
             }
             var id = ""
@@ -72,13 +74,13 @@ object ChannelUtils {
                 if (System.currentTimeMillis() - lastModified > 24 * 60 * 60 * 1000) {
                     try {
                         if (downloadIPTVFile(file)) {
-                            Log.e("ww", "getChannelFile update iptv file success")
+                            Log.e(TAG, "getChannelFile update iptv file success")
                         } else {
-                            Log.e("ww", "getChannelFile update iptv file fail")
+                            Log.e(TAG, "getChannelFile update iptv file fail")
                         }
-                    } catch (e:Exception) {
+                    } catch (e: Exception) {
                         e.printStackTrace()
-                        Log.e("ww", "auto update iptv file fail")
+                        Log.e(TAG, "auto update iptv file fail")
                     }
                 }
             }
@@ -87,7 +89,8 @@ object ChannelUtils {
     }
 
     fun downloadIPTVFile(file: File): Boolean {
-        val client = OkHttpClient.Builder().build()
+        val client =
+            OkHttpClient.Builder().followRedirects(false).addInterceptor(RetryInterceptor()).build()
         val url = API.URL_M3U
         return client.newCall(Request.Builder().url(url).build()).execute().use {
             if (it.isSuccessful) {
@@ -97,7 +100,7 @@ object ChannelUtils {
                     true
                 } ?: false
             } else {
-                Log.e("ww", "download iptv file fail${it.message}}")
+                Log.e(TAG, "download iptv file fail${it.message}}")
                 false
             }
         }

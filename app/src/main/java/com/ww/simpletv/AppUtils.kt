@@ -8,6 +8,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.content.FileProvider
 import com.google.gson.Gson
+import com.ww.simpletv.bean.VersionInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -33,11 +34,13 @@ import java.security.NoSuchAlgorithmException
  * @author Potato-66
  */
 object AppUtils {
+    private const val TAG = "AppUtils"
+
     fun getAppVersionName(context: Context): String {
         return try {
             context.packageManager.getPackageInfo(context.packageName, 0).versionName
         } catch (e: Exception) {
-            Log.e("ww", "getAppVersion: error:${e.message}")
+            Log.e(TAG, "getAppVersion: error:${e.message}")
             ""
         }
     }
@@ -50,7 +53,7 @@ object AppUtils {
                 context.packageManager.getPackageInfo(context.packageName, 0).versionCode.toLong()
             }
         } catch (e: Exception) {
-            Log.e("ww", "getAppVersionCode: error:${e.message}")
+            Log.e(TAG, "getAppVersionCode: error:${e.message}")
             0
         }
     }
@@ -66,7 +69,7 @@ object AppUtils {
                 }
             }
         } catch (e: Exception) {
-            Log.e("ww", "checkVersion error:${e.message}")
+            Log.e(TAG, "checkVersion error:${e.message}")
         }
         return null
     }
@@ -103,12 +106,12 @@ object AppUtils {
                         outputStream!!.flush()
                     }
                 } else {
-                    Log.e("ww", "请求失败,error code:${response.code}")
+                    Log.e(TAG, "请求失败,error code:${response.code}")
                     emit(DownloadStatus.Fail(response.code))
                 }
             }
         }.onCompletion {
-            Log.e("ww", "download: onCompletion")
+            Log.e(TAG, "download: onCompletion")
             inputStream?.close()
             outputStream?.close()
             delay(1000)
@@ -116,14 +119,14 @@ object AppUtils {
             if (file.exists()) {
                 val md5 = getMD5(file)
                 if (md5 != versionInfo?.md5) {
-                    Log.e("ww", "download: md5:$md5,remote md5:${versionInfo?.md5}")
+                    Log.e(TAG, "download: md5:$md5,remote md5:${versionInfo?.md5}")
                     emit(DownloadStatus.Fail(-1))
                 } else {
                     emit(DownloadStatus.Success)
                 }
             }
         }.catch { error ->
-            Log.e("ww", "download: catch error:${error.message}")
+            Log.e(TAG, "download: catch error:${error.message}")
             inputStream?.close()
             outputStream?.close()
             emit(DownloadStatus.Error(error))
@@ -161,10 +164,10 @@ object AppUtils {
                 digest().toHexString()
             }
         } catch (e: NoSuchAlgorithmException) {
-            Log.e("ww", "getMD5: error:${e.message}")
+            Log.e(TAG, "getMD5: error:${e.message}")
             ""
         } catch (e: IllegalArgumentException) {
-            Log.e("ww", "getMD5: error:${e.message}")
+            Log.e(TAG, "getMD5: error:${e.message}")
             ""
         } finally {
             inputStream?.close()

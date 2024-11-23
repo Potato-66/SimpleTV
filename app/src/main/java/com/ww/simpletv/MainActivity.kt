@@ -24,6 +24,10 @@ import kotlinx.coroutines.launch
  * @author Potato-66
  */
 class MainActivity : BaseActivity() {
+    companion object{
+        private const val TAG = "MainActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -32,7 +36,7 @@ class MainActivity : BaseActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_main) as ActivityMainBinding
         val isInit = MMKV.defaultMMKV().decodeBool(Constant.KEY_INIT, true)
         val handler = CoroutineExceptionHandler { _, throwable ->
-            Log.e("ww", "onCreate: exception:${throwable.message}")
+            Log.e(TAG, "onCreate: exception:${throwable.message}")
             if (isInit) {
                 binding.tvMessage.text = getString(R.string.init_channel_list_fail_network_error)
             } else {
@@ -49,13 +53,13 @@ class MainActivity : BaseActivity() {
             ChannelUtils.parseChannel(this@MainActivity)
             binding.progress.hide()
             if (ChannelUtils.channelSet.isEmpty()) {
-                Log.e("ww", "onCreate: 没有频道列表,退出播放")
+                Log.e(TAG, "onCreate: 没有频道列表,退出播放")
                 binding.tvMessage.text = getString(R.string.load_channel_list_fail)
             } else {
                 if (isInit) {
                     MMKV.defaultMMKV().encode(Constant.KEY_INIT, false)
                 }
-                Log.e("ww", "onCreate: channel size:${ChannelUtils.channelSet.size}")
+                Log.e(TAG, "onCreate: channel size:${ChannelUtils.channelSet.size}")
                 binding.tvMessage.visibility = View.GONE
                 startActivity(Intent(this@MainActivity, PlayerActivity::class.java))
                 finish()
